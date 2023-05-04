@@ -1,0 +1,29 @@
+plugins {
+    id 'java'
+}
+
+repositories {
+    mavenCentral()
+}
+
+jar {
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
+    manifest {
+        attributes["Main-Class"] = "main.EngineMain"
+    }
+}
+
+dependencies {
+    implementation 'net.dongliu:apk-parser:2.6.10'
+    implementation 'org.slf4j:slf4j-nop:1.7.36'
+    implementation 'org.soot-oss:soot:4.3.0'
+    implementation 'org.graphstream:gs-core:2.0'
+    implementation 'org.graphstream:gs-ui-javafx:2.0'
+    implementation 'com.opencsv:opencsv:5.6'
+    implementation 'org.choco-solver:choco-solver:4.10.8'
+}

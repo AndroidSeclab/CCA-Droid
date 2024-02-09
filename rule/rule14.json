@@ -1,0 +1,33 @@
+{
+	"slicingSignatures": {
+		"<javax.crypto.spec.PBEKeySpec: void <init>(char[])>": [0],
+		"<javax.crypto.spec.PBEKeySpec: void <init>(char[],byte[],int)>": [0],
+		"<javax.crypto.spec.PBEKeySpec: void <init>(char[],byte[],int,int)>": [0],
+		"<javax.crypto.spec.DESKeySpec: void <init>(byte[])>": [0],
+		"<javax.crypto.spec.DESKeySpec: void <init>(byte[],int)>": [0],
+		"<javax.crypto.spec.SecretKeySpec: void <init>(byte[],java.lang.String)>": [0],
+		"<javax.crypto.spec.SecretKeySpec: void <init>(byte[],int,int,java.lang.String)>": [0]
+	},
+	"insecureRule": {
+		"ruleID": "14-1",
+		"description": "This method uses a short size key for generating MAC",
+		"conditions": {
+			"requiredSchemeTypes": [
+				"EncryptandMAC", "EncryptthenMAC"
+			],
+			"targetConstant": ".*",
+			"targetConstantLength": "x<16"
+		}
+	},
+	"secureRule": {
+		"ruleID": "14-2",
+		"description": "This method uses a enough size key for generating MAC",
+		"conditions": {
+			"requiredSchemeTypes": [
+				"EncryptandMAC", "EncryptthenMAC"
+			],
+			"targetConstant": ".*",
+			"targetConstantLength": "x>=16"
+		}
+	}
+}

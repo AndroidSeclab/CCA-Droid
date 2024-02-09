@@ -1,0 +1,30 @@
+{
+	"slicingSignatures": {
+		"<javax.crypto.spec.IvParameterSpec: void <init>(byte[])>": [0],
+        "<javax.crypto.spec.IvParameterSpec: void <init>(byte[],int,int)>": [0],
+        "<javax.crypto.spec.GCMParameterSpec: void <init>(int,byte[])>": [1],
+        "<javax.crypto.spec.GCMParameterSpec: void <init>(int,byte[],int,int)>": [1]
+	},
+	"insecureRule": {
+		"ruleID": "7-1",
+		"description": "This method uses an insecure random method for generating IV",
+		"conditions": {
+			"targetSignatures": [
+				"<java.util.Random: void nextBytes(byte[])>",
+		        "<java.util.Random: int nextInt()>",
+		        "<android.os.SystemClock: long uptimeMillis()>",
+		        "<android.os.SystemClock: long elapsedRealtime()>"
+			]
+		}
+	},
+	"secureRule": {
+		"ruleID": "7-2",
+		"description": "This method uses a secure random method for generating IV",
+		"conditions": {
+			"targetSignatures": [
+				"<java.security.SecureRandom: void nextBytes(byte[])>",
+				"<java.security.SecureRandom: int nextInt()>"
+			]
+		}
+	}
+}

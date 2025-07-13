@@ -1,0 +1,47 @@
+{
+	"slicingSignatures": {
+		"<javax.crypto.spec.PBEKeySpec: void <init>(char[])>": [0],
+		"<javax.crypto.spec.PBEKeySpec: void <init>(char[],byte[],int)>": [0],
+		"<javax.crypto.spec.PBEKeySpec: void <init>(char[],byte[],int,int)>": [0],
+		"<javax.crypto.spec.DESKeySpec: void <init>(byte[])>": [0],
+		"<javax.crypto.spec.DESKeySpec: void <init>(byte[],int)>": [0],
+		"<javax.crypto.spec.SecretKeySpec: void <init>(byte[],java.lang.String)>": [0],
+		"<javax.crypto.spec.SecretKeySpec: void <init>(byte[],int,int,java.lang.String)>": [0]
+	},
+	"insecureRule": {
+		"ruleID": "3-1",
+		"description": "This slice uses a hardcoded key",
+		"conditions": [
+			{
+				"targetConstantRegex": ".*"
+			},
+			{
+				"targetSignatures": [
+					"<java.lang.String: void <init>(java.lang.String)>",
+					"<java.lang.StringBuilder: java.lang.String toString()>",
+					"<androidx.appcompat.widget.AppCompatEditText: android.text.Editable getText()>",
+					"<androidx.preference.R$style: char[] getEditTextChars(android.widget.EditText)>"
+				]
+			}
+		]
+	},
+	"secureRule": {
+		"ruleID": "3-2",
+		"description": "This slice uses a random key",
+		"conditions": {
+			"targetSignatures": [
+				"<java.lang.System: long currentTimeMillis()>",
+				"<java.util.Random: int nextInt()>",
+				"<java.util.Random: int nextInt(int)>",
+				"<java.util.Random: long nextLong()>",
+				"<java.util.Random: void nextBytes(byte[])>",
+				"<java.security.SecureRandom int next(int)>",
+				"<java.security.SecureRandom: int nextInt()>",
+				"<java.security.SecureRandom: java.util.stream.IntStream ints()>",
+				"<java.security.SecureRandom: void nextBytes(byte[])>",
+				"<javax.crypto.KeyAgreement: byte[] generateSecret()>",
+				"<javax.crypto.Mac: byte[] doFinal(byte[])>"
+			]
+		}
+	}
+}

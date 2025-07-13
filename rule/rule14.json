@@ -1,0 +1,37 @@
+{
+	"slicingSignatures": {
+		"<javax.crypto.Mac: byte[] doFinal()>": [-1],
+		"<javax.crypto.Mac: byte[] doFinal(byte[])>": [0],
+		"<javax.crypto.Mac: void doFinal(byte[],int)>": [-1],
+		"<javax.crypto.Cipher: byte[] doFinal()>" : [-1],
+		"<javax.crypto.Cipher: byte[] doFinal(byte[])>": [-1,0],
+        "<javax.crypto.Cipher: byte[] doFinal(byte[],int,int)>": [-1,0],
+		"<javax.crypto.Cipher: int doFinal(byte[],int)>": [-1,0],
+		"<javax.crypto.Cipher: int doFinal(byte[],int,int,byte[])>": [-1,0],
+        "<javax.crypto.Cipher: int doFinal(byte[],int,int,byte[],int)>": [-1,0],
+        "<javax.crypto.CipherOutputStream: void write(byte[])>": [-1,0],
+        "<javax.crypto.CipherOutputStream: void write(byte[],int,int)>": [-1,0]
+	},
+	"insecureRule": {
+		"ruleID": "14-1",
+		"description": "This method uses a short size key for generating MAC",
+		"conditions": {
+			"targetSchemeTypes": [
+				"EncryptandMAC", "EncryptthenMAC"
+			],
+			"targetConstantRegex": ".*",
+			"targetConstantLength": "x<16"
+		}
+	},
+	"secureRule": {
+		"ruleID": "14-2",
+		"description": "This method uses a enough size key for generating MAC",
+		"conditions": {
+			"targetSchemeTypes": [
+				"EncryptandMAC", "EncryptthenMAC"
+			],
+			"targetConstantRegex": ".*",
+			"targetConstantLength": "x>=16"
+		}
+	}
+}

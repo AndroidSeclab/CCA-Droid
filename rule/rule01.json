@@ -1,0 +1,45 @@
+{
+	"slicingSignatures": {
+		"<javax.crypto.Cipher: void init(int,java.security.Key)>": [-1],
+        "<javax.crypto.Cipher: void init(int,java.security.Key,java.security.AlgorithmParameters)>": [-1],
+        "<javax.crypto.Cipher: void init(int,java.security.Key,java.security.spec.AlgorithmParameterSpec)>": [-1],
+        "<javax.crypto.Cipher: void init(int,java.security.Key,java.security.spec.AlgorithmParameterSpec,java.security.SecureRandom)>": [-1],
+		"<javax.crypto.Cipher: void init(int,java.security.Key,java.security.AlgorithmParameters,java.security.SecureRandom)>": [-1],
+        "<javax.crypto.Cipher: void init(int,java.security.Key,java.security.SecureRandom)>": [-1],
+		"<javax.crypto.KeyGenerator: javax.crypto.KeyGenerator getInstance(java.lang.String)>": [0],
+		"<javax.crypto.KeyGenerator: javax.crypto.KeyGenerator getInstance(java.lang.String, java.security.Provider)>": [0],
+		"<javax.crypto.KeyGenerator: javax.crypto.KeyGenerator getInstance(java.lang.String, java.lang.String)>": [0]
+	},
+	"insecureRule": {
+		"ruleID": "1-1",
+		"description": "This method uses an insecure algorithm",
+		"conditions": [
+			{
+				"targetAlgorithms": [
+					"ARC4",
+					"Blowfish",
+					"DES",
+					"DESede",
+					"IDEA",
+					"RC2",
+					"RC4"
+				]
+			},
+			{
+				"targetSignatures": [
+					"<javax.crypto.spec.DESKeySpec: void DESKeySpec(byte[])>",
+					"<javax.crypto.spec.DESKeySpec: void DESKeySpec(byte[],int)>"
+				]
+			}
+		]
+	},
+	"secureRule": {
+		"ruleID": "1-2",
+		"description": "This method uses secure algorithm",
+		"conditions": {
+			"targetAlgorithms": [
+				"AES"
+			]
+		}
+	}
+}

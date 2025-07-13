@@ -1,0 +1,35 @@
+{
+	"slicingSignatures": {
+		"<javax.crypto.spec.IvParameterSpec: void <init>(byte[])>": [0],
+        "<javax.crypto.spec.IvParameterSpec: void <init>(byte[],int,int)>": [0],
+        "<javax.crypto.spec.GCMParameterSpec: void <init>(int,byte[])>": [1],
+        "<javax.crypto.spec.GCMParameterSpec: void <init>(int,byte[],int,int)>": [1]
+	},
+	"insecureRule": {
+		"ruleID": "10-1",
+		"description": "This method uses a hardcoded IV",
+		"conditions": [
+			{
+				"targetConstantRegex": ".*"
+			},
+			{
+				"targetSignatures": [
+					"<java.lang.StringBuilder: java.lang.String toString()>"
+				]
+			}
+		]
+	},
+	"secureRule": {
+		"ruleID": "10-2",
+		"description": "This method uses a random IV",
+		"conditions": {
+			"targetSignatures": [
+				"<java.util.Random: void nextBytes(byte[])>",
+				"<java.util.Random: int nextInt()>",
+				"<java.security.SecureRandom: void nextBytes(byte[])>",
+				"<java.security.SecureRandom: int nextInt()>",
+				"<javax.crypto.Mac: byte[] doFinal(byte[])>"
+			]
+		}
+	}
+}

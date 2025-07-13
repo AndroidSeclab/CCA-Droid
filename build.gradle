@@ -1,0 +1,36 @@
+plugins {
+    id 'java'
+}
+
+group 'com.ccadroid'
+version '240923-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+jar {
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
+    manifest {
+        attributes["Main-Class"] = "com.ccadroid.EngineMain"
+    }
+}
+
+dependencies {
+    implementation 'net.sourceforge.argparse4j:argparse4j:0.9.0'
+    implementation 'net.dongliu:apk-parser:2.6.10'
+    implementation 'org.slf4j:slf4j-nop:2.0.7'
+    implementation 'org.soot-oss:soot:4.5.0'
+    implementation 'com.opencsv:opencsv:5.9'
+    implementation 'org.graphstream:gs-core:2.0'
+    implementation 'org.graphstream:gs-ui-javafx:2.0'
+    implementation 'org.json:json:20240303'
+    implementation 'org.mariuszgromada.math:MathParser.org-mXparser:6.0.0'
+    implementation 'jakarta.xml.bind:jakarta.xml.bind-api:4.0.2'
+    implementation 'org.choco-solver:choco-solver:4.10.14'
+}

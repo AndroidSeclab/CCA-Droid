@@ -1,0 +1,49 @@
+{
+	"slicingSignatures": {
+		"<javax.crypto.Mac: byte[] doFinal()>": [-1],
+		"<javax.crypto.Mac: byte[] doFinal(byte[])>": [0],
+		"<javax.crypto.Mac: void doFinal(byte[],int)>": [-1],
+		"<javax.crypto.Cipher: byte[] doFinal()>" : [-1],
+		"<javax.crypto.Cipher: byte[] doFinal(byte[])>": [-1,0],
+        "<javax.crypto.Cipher: byte[] doFinal(byte[],int,int)>": [-1,0],
+		"<javax.crypto.Cipher: int doFinal(byte[],int)>": [-1,0],
+		"<javax.crypto.Cipher: int doFinal(byte[],int,int,byte[])>": [-1,0],
+        "<javax.crypto.Cipher: int doFinal(byte[],int,int,byte[],int)>": [-1,0],
+        "<javax.crypto.CipherOutputStream: void write(byte[])>": [-1,0],
+        "<javax.crypto.CipherOutputStream: void write(byte[],int,int)>": [-1,0]
+	},
+	"insecureRule": {
+		"ruleID": "13-1",
+		"description": "This method is insecure for CCA",
+		"conditions": {
+			"targetAlgorithms": [
+				"AES-GCM",
+				"ARC4",
+				"Blowfish",
+				"DES",
+				"DESede",
+				"IDEA",
+				"RC2",
+				"RC4"
+			]
+		}
+	},
+	"secureRule": {
+		"ruleID": "13-2",
+		"description": "This method is secure for CCA",
+		"conditions": [
+			{ 
+				"targetSchemeTypes": [
+					"EncryptthenMAC",
+					"EncryptandMAC",
+					"MACthenEncrypt"
+				]
+			},
+			{
+				"targetAlgorithms": [
+					"AES/GCM"
+				]
+			}
+		]
+	}
+}

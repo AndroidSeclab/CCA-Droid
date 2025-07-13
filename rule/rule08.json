@@ -1,0 +1,34 @@
+{
+	"slicingSignatures": {
+		"<javax.crypto.spec.PBEKeySpec: void <init>(char[])>": [0],
+        "<javax.crypto.spec.PBEKeySpec: void <init>(char[],byte[],int)>": [0],
+        "<javax.crypto.spec.PBEKeySpec: void <init>(char[],byte[],int,int)>": [0],
+        "<javax.crypto.spec.DESKeySpec: void <init>(byte[])>": [0],
+		"<javax.crypto.spec.DESKeySpec: void <init>(byte[],int)>": [0],
+        "<javax.crypto.spec.SecretKeySpec: void <init>(byte[],java.lang.String)>": [0],
+		"<javax.crypto.spec.SecretKeySpec: void <init>(byte[],int,int,java.lang.String)>": [0]
+	},
+	"insecureRule": {
+		"ruleID": "8-1",
+		"description": "This method uses an insecure random method for generating cryptographic key",
+		"conditions": {
+			"targetSignatures": [
+				"<java.util.Random: void nextBytes(byte[])>",
+	        	"<java.util.Random: int nextInt()>",
+	        	"<android.os.SystemClock: long uptimeMillis()>",
+	        	"<android.os.SystemClock: long elapsedRealtime()>"
+			]
+		}
+	},
+	"secureRule": {
+		"ruleID": "8-2",
+		"description": "This method uses a secure random method for generating cryptographic key",
+		"conditions": {
+			"targetSignatures": [
+	        	"<java.security.SecureRandom: void nextBytes(byte[])>",
+	        	"<java.security.SecureRandom: int nextInt()>",
+	        	"<javax.crypto.KeyGenerator: javax.crypto.SecretKey generateKey()>"
+			]
+		}
+	}
+}

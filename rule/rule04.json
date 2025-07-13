@@ -1,0 +1,33 @@
+{
+	"slicingSignatures": {
+		"<javax.crypto.spec.PBEKeySpec: void <init>(char[],byte[],int)>": [1],
+		"<javax.crypto.spec.PBEKeySpec: void <init>(char[],byte[],int,int)>": [1],
+		"<javax.crypto.spec.PBEParameterSpec: void <init>(byte[],int)>": [0]
+	},
+	"insecureRule": {
+		"ruleID": "4-1",
+		"description": "This method uses static salt for PBE",
+		"conditions": [
+			{
+				"targetConstantRegex": ".*"
+			},
+			{
+				"targetSignatures": [
+					"<java.lang.StringBuilder: java.lang.String toString()>"
+				]
+			}
+		]
+	},
+	"secureRule": {
+		"ruleID": "4-2",
+		"description": "This method uses random salt for PBE",
+		"conditions": {
+			"targetSignatures": [
+				"<java.util.Random: void nextBytes(byte[])>",
+				"<java.util.Random: int nextInt()>",
+				"<java.security.SecureRandom: void nextBytes(byte[])>",
+				"<java.security.SecureRandom: int nextInt()>"
+			]
+		}
+	}
+}

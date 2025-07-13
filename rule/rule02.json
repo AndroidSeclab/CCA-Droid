@@ -1,0 +1,44 @@
+{
+	"slicingSignatures": {
+		"<javax.crypto.Cipher: byte[] doFinal(byte[])>": [-1,0],
+		"<javax.crypto.Cipher: int doFinal(byte[],int)>": [-1,0],
+		"<javax.crypto.Cipher: byte[] doFinal(byte[],int,int)>": [-1,2],
+		"<javax.crypto.Cipher: int doFinal(byte[],int,int,byte[])>": [-1,2],
+		"<javax.crypto.Cipher: int doFinal(byte[],int,int,byte[],int)>": [-1,2],
+		"<javax.crypto.CipherOutputStream: void write(byte[])>": [-1,0],
+		"<javax.crypto.CipherOutputStream: void write(byte[],int,int)>": [-1,2]
+	},
+	"insecureRule": {
+		"ruleID": "2-1",
+		"description": "This method uses the ECB algorithm and encrypts at least 1 block",
+        "conditions": [
+			{
+	            "targetAlgorithms": [
+					"AES/ECB"
+				],
+	            "targetConstantRegex": ".*",
+	        	"targetConstantLength": "x>8"
+			},
+			{
+				"targetAlgorithms": [
+					"AES/ECB"
+				],
+				"targetSignatures": [
+					"<android.content.SharedPreferences: java.lang.String getString(java.lang.String,java.lang.String)>",
+					"<android.widget.EditText: android.text.Editable getText()>"
+				]
+			}
+        ]
+	},
+	"secureRule": {
+		"ruleID": "2-2",
+		"description": "This method uses a ECB algorithm, but encrypts only 1 block",
+		"conditions": {
+			"targetAlgorithms": [
+				"AES/ECB"
+			],
+			"targetConstantRegex": ".*",
+			"targetConstantLength": "x<=8"
+		}
+	}
+}

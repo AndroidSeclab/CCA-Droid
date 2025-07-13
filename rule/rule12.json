@@ -1,0 +1,26 @@
+{
+	"slicingSignatures": {
+		"<javax.crypto.Mac: byte[] doFinal()>": [-1],
+		"<javax.crypto.Mac: byte[] doFinal(byte[])>": [0],
+		"<javax.crypto.Mac: void doFinal(byte[],int)>": [-1]
+	},
+	"insecureRule": {
+		"ruleID": "12-1",
+		"description": "This method uses Encrypt-and-MAC scheme",
+		"conditions": {
+			"targetSchemeTypes": [
+				"EncryptandMAC"
+			]
+		}
+	},
+	"secureRule": {
+		"ruleID": "12-2",
+		"description": "This method uses secure MAC scheme",
+		"conditions": {
+			"targetSchemeTypes": [
+				"EncryptthenMAC",
+				"MACthenEncrypt"
+			]
+		}
+	}
+}

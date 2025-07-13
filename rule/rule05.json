@@ -1,0 +1,23 @@
+{
+	"slicingSignatures": {
+        "<javax.crypto.spec.PBEKeySpec: void <init>(char[],byte[],int)>": [2],
+		"<javax.crypto.spec.PBEKeySpec: void <init>(char[],byte[],int,int)>": [2],
+		"<javax.crypto.spec.PBEParameterSpec: void <init>(byte[],int)>": [1]
+	},
+	"insecureRule": {
+		"ruleID": "5-1",
+		"description": "This method uses short PBE iteration count",
+		"conditions": {
+			"targetConstantRegex": "[0-9]{1,10}",
+			"targetConstantSize": "x>0 & x<1000"
+		}
+	},
+	"secureRule": {
+		"ruleID": "5-2",
+		"description": "This method uses enough PBE iteration count",
+		"conditions": {
+			"targetConstantRegex": "[0-9]{1,10}",
+			"targetConstantSize": "x>0 & x>=1000"
+		}
+	}
+}

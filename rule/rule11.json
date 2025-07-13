@@ -1,0 +1,37 @@
+{
+	"slicingSignatures": {
+		"<javax.crypto.Cipher: void init(int,java.security.Key)>": [-1],
+        "<javax.crypto.Cipher: void init(int,java.security.Key,java.security.AlgorithmParameters)>": [-1],
+        "<javax.crypto.Cipher: void init(int,java.security.Key,java.security.spec.AlgorithmParameterSpec)>": [-1],
+        "<javax.crypto.Cipher: void init(int,java.security.Key,java.security.spec.AlgorithmParameterSpec,java.security.SecureRandom)>": [-1],
+        "<javax.crypto.Cipher: void init(int,java.security.Key,java.security.AlgorithmParameters,java.security.SecureRandom)>": [-1],
+        "<javax.crypto.Cipher: void init(int,java.security.Key,java.security.SecureRandom)>": [-1]
+	},
+	"insecureRule": {
+		"ruleID": "11-1",
+		"description": "This method uses insecure padding for RSA algorithm",
+		"conditions": {
+			"targetAlgorithms": [
+				"RSA-OAEP",
+				"RSA/.*/NoPadding",
+				"RSA/.*/PKCS1Padding"
+			]
+		}
+	},
+	"secureRule": {
+		"ruleID": "11-2",
+		"description": "This method uses secure padding for RSA algorithm",
+		"conditions": [
+			{
+				"targetAlgorithms": [
+					"RSA/.*/OAEP.*"
+				]
+			},
+			{
+				"targetSignatures": [
+					"<javax.crypto.spec.OAEPParameterSpec: void <init>(java.lang.String,java.lang.String,java.security.spec.AlgorithmParameterSpec,javax.crypto.spec.PSource)>"
+				]
+			}
+		]
+	}
+}

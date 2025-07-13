@@ -1,0 +1,38 @@
+{
+	"slicingSignatures": {
+		"<java.util.Random: void <init>(long)>": [0],
+        "<java.util.Random: void setSeed(long)>": [0],
+		"<java.security.SecureRandom: void <init>(byte[])>": [0],
+        "<java.security.SecureRandom: void setSeed(long)>": [0],
+        "<java.security.SecureRandom: void setSeed(byte[])>": [0]
+	},
+	"insecureRule": {
+		"ruleID": "6-1",
+		"description": "This method uses static seeds",
+		"conditions": [
+			{
+				"targetConstantRegex": ".*"
+			},
+			{
+				"targetSignatures": [
+					"<java.lang.StringBuilder: java.lang.String toString()>"
+				]
+			}
+		]
+	},
+	"secureRule": {
+		"ruleID": "6-2",
+		"description": "This method uses random seeds",
+		"conditions": {
+			"targetSignatures": [
+				"<java.lang.System: long nanoTime()>",
+				"<java.util.Random: int nextInt()>",
+				"<java.util.Random: long nextLong()>",
+				"<java.util.Random: void nextBytes(byte[])>",
+				"<java.security.SecureRandom: void nextBytes(byte[])>",
+				"<java.security.SecureRandom: int nextInt()>",
+				"<java.security.SecureRandom: long nextLong()>"
+			]
+		}
+	}
+}

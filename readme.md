@@ -55,11 +55,11 @@ Each rule file mentioned in Section 2 is located in the `rule` folder. The meani
 <br>
 
 ## A DIY example: Performing app security analysis using CCA-Droid
-In this example, we'll show you how to use CCA-Droid to analyze a sample app and interpret the results. Please follow these steps:
+In this example, we'll show you how to use CCA-Droid to analyze a sample app(e.g., StaticInitializationVector.apk) and interpret the results. Please follow these steps:
 1. Place the generated JAR file (build/libs/CCA-Droid-<version>-SNAPSHOT.jar) and the rule folder in the project directory.
 2. To start the analysis, open a terminal in the project root directory and enter the following command:
     ```bash
-    java -jar build/libs/CCA-Droid-<version>-SNAPSHOT.jar -p /path/to/Android/Sdk/platforms -i dataset/sample.apk -r rule > result.txt
+    java -jar build/libs/CCA-Droid-<version>-SNAPSHOT.jar -p /path/to/Android/Sdk/platforms -i dataset/staticinitializationvector/StaticInitializationVector.apk -r rule > result.txt
     ```
 	
 	**Option descriptions:**
@@ -76,11 +76,10 @@ In this example, we'll show you how to use CCA-Droid to analyze a sample app and
    ```
    [*] Rule ID: 10-1
    [*] Description: This method uses a hardcoded IV
-   [*] Caller name: <com.androidseclab.cryptoapibench.Crypto1: javax.crypto.spec.IvParameterSpec getIV(int)>
+   [*] Caller name: <com.androidseclab.cryptoapibench.staticinitializationvector.StaticInitializationVectorBBCase2: void go()>
    [*] Target statement: <javax.crypto.spec.IvParameterSpec: void <init>(byte[])>
    [*] Target lines:
-   <com.androidseclab.cryptoapibench.Crypto1: javax.crypto.spec.IvParameterSpec getIV(int)>:
-   $r2 = "this_is_iv"
+   $r3 = "abcde", callerName=<com.androidseclab.cryptoapibench.staticinitializationvector.StaticInitializationVectorBBCase2: void go()>
    ```
 
 4.  Each line means:

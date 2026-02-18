@@ -13,17 +13,16 @@ We confirmed that CCA-Droid runs on a 64-bit Ubuntu 18.04.5 LTS with openjdk 11.
 
 * Install Java >= 11.0.17
 
-* To access the CCA-Droid source code, clone this repository using the following command:
-  ```bash
-  git clone https://github.com/AndroidSeclab/CCA-Droid.git
-  ```
-* Once the repository is cloned, navigate to the CCA-Droid directory. Then compile the source code and build the JAR file by running the below command:
+* To access the CCA-Droid source code in the anonymous artifact repository, download the repository as a ZIP file.
+  
+* Extract the ZIP file and navigate to the CCA-Droid directory. Then compile the source code and build the JAR file by running the below command:
   ```bash
    cd CCA-Droid
    ./gradlew clean assemble
   ```
 
-* The compiled JAR file will be located at `build/libs/CCA-Droid.jar` within the CCA-Droid directory.
+* The compiled JAR file will be located at build/libs/CCA-Droid-<version>-SNAPSHOT.jar within the CCA-Droid directory.
+(Example: build/libs/CCA-Droid-240923-SNAPSHOT.jar)
 
 <br>
 
@@ -57,20 +56,20 @@ Each rule file mentioned in Section 2 is located in the `rule` folder. The meani
 
 ## A DIY example: Performing app security analysis using CCA-Droid
 In this example, we'll show you how to use CCA-Droid to analyze a sample app and interpret the results. Please follow these steps:
-1. Place the CCA-Droid.jar file and rule files in a folder.
-2. To start the analysis, open a terminal and enter the following command:
+1. Place the generated JAR file (build/libs/CCA-Droid-<version>-SNAPSHOT.jar) and the rule folder in the project directory.
+2. To start the analysis, open a terminal in the project root directory and enter the following command:
     ```bash
-    java -jar ./CCA-Droid.jar -p ./platforms -i ./dataset/sample.apk -r ./rule >> result.txt
+    java -jar build/libs/CCA-Droid-<version>-SNAPSHOT.jar -p /path/to/Android/Sdk/platforms -i dataset/sample.apk -r rule > result.txt
     ```
 	
 	**Option descriptions:**
-	- `-p ./platforms` : Path to the Android SDK platforms directory (e.g., /home/user/Android/Sdk/platforms)
+	- -`p` : Path to the Android SDK platforms directory (e.g., /home/user/Android/Sdk/platforms)
 	
 	- `-i` : Input APK file to be analyzed
 	
 	- `-r` : Rule directory or file that defines detection logic
 	
-	- `>> result.txt` : Redirects the output to result.txt
+	- `> result.txt` : Redirects the output to result.txt
 
 3. Once the analysis completes, open the `result.txt` file to examine the detailed analysis results.
 
